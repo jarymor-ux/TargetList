@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ru.ostap.todolist.dto.UserDTO;
-import ru.ostap.todolist.service.UserService;
+import ru.ostap.todolist.service.RegistrationService;
 
 import javax.validation.Valid;
 @Controller
 @RequestMapping("/auth")
-public class RegistrationController {
-    private final UserService userService;
+public class AuthController {
+    private final RegistrationService registrationService;
     @Autowired
-    public RegistrationController(UserService userService) {
-        this.userService = userService;
+    public AuthController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
     }
 
     @GetMapping("/registration")
@@ -32,7 +32,15 @@ public class RegistrationController {
         if (bindingResult.hasErrors()) {
             return "auth/registration";
         }
-        userService.save(user);
-        return "redirect:home";
+        registrationService.save(user);
+        return "redirect:/auth/login";
+
+        //TODO:Test migration to this method in RestUserController
     }
+
+    @GetMapping("/login")
+    public String loginForm(){
+        return "auth/form-login";
+    }
+
 }

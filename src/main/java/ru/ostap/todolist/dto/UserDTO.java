@@ -1,9 +1,11 @@
 package ru.ostap.todolist.dto;
 
 import lombok.Data;
+import ru.ostap.todolist.dto.enums.Role;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -24,6 +26,12 @@ public class UserDTO {
   @NotBlank(message = "Password should be not empty")
   @NotNull(message = "Password should be not null")
   private String password;
+
+  @NotBlank(message = "Role should be not empty")
+  @NotNull(message = "Role should be not null")
+  private String role; //TODO: replace in class User and UserDTO with Role enum
+
+  private boolean enabled;
 
   private List<TaskDTO> tasks;
 }

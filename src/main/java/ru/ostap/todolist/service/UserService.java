@@ -1,6 +1,10 @@
 package ru.ostap.todolist.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ru.ostap.todolist.dto.UserDTO;
@@ -13,14 +17,16 @@ public class UserService {
 
   private final UserRepository userRepository;
   private final DtoConverter dtoConverter;
+  private final PasswordEncoder passwordEncoder;
 
   @Autowired
-  public UserService(UserRepository userRepository, DtoConverter dtoConverter) {
+  public UserService(UserRepository userRepository, DtoConverter dtoConverter, PasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;
     this.dtoConverter = dtoConverter;
+    this.passwordEncoder = passwordEncoder;
   }
 
-  public User getUserById(Long id) {
+  public Optional<User> getUserById(Long id) {
     return userRepository.getUserById(id);
   }
 
@@ -29,9 +35,13 @@ public class UserService {
    * but in db these fields set automaticly
    */
 
-  @SuppressWarnings("null")
-  public void save(UserDTO userDTO) {
-    User user = dtoConverter.convertUserDTOtoUser(userDTO);
+
+  public Optional<User> getUserByUsername(String username){
+    return userRepository.getUserByUsername(username);
+  }
+
+
+  public void save(User user) {
     userRepository.save(user);
   }
 }

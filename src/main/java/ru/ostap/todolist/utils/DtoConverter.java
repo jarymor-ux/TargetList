@@ -20,6 +20,8 @@ public class DtoConverter {
     userDTO.setUsername(user.getUsername());
     userDTO.setTasks(convertTasksListToTasksDTOList(user.getTasks()));
     userDTO.setPassword(user.getPassword());
+    userDTO.setRole(user.getRole());
+    userDTO.setEnabled(user.isEnabled());
     return userDTO;
   }
 
@@ -48,6 +50,8 @@ public class DtoConverter {
     user.setUsername(userDTO.getUsername());
     user.setEmail(userDTO.getEmail());
     user.setPassword(userDTO.getPassword());
+    user.setRole(userDTO.getRole());
+    user.setEnabled(userDTO.isEnabled());
     return user;
   }
 }

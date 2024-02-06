@@ -4,12 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
-</head>
-<body>
-    <h1>Hello user</h1>
-    <form th:action="@{/auth/registration}" method="get">
-        <button type="submit">Registration</button>
-    </form>
 
+</head>
+<body >
+     <h1>Hello user</h1> <!--это можно удалить -->
+
+     <form th:action="@{/auth/registration}" method="get"> <!-- Все формы перемещай куда угоодно  -->
+     <button type="submit">Sign-in</button>                 <!-- Переход на форму регистрации -->           
+     </form>
+     <form th:action="@{/auth/login}" method="get">
+        <button type="submit">Login</button>         <!-- Переход на форму логина --> 
+     </form>
+    
+     <form th:action="@{/about}" method="get">
+        <button type="submit">About</button>          <!-- Переход на страницу где рассказывается о сервисе --> 
+     </form>
+
+     <form th:action="@{/contacts}" method="get">
+        <button type="submit">Contacts</button>     <!-- Переход на страницу где перечисленны мои контакты --> 
+     </form>
+
+     <form th:action="@{/logout}" method="post">
+         <button type="submit">Logout</button>
+     </form>
+
+    <!-- Описание сервиса: сервис предназначен для записывания целей и отслеживания их выполнения(Для справки)
+        если есть желание то сделай и страницу логина тоже
+        по любым вопросам пиши и если есть идеи что-то добавить то тоже пиши-->
 </body>
 </html>

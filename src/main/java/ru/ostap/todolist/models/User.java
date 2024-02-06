@@ -1,6 +1,7 @@
 package ru.ostap.todolist.models;
 
 import lombok.Data;
+import ru.ostap.todolist.dto.enums.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -33,6 +34,15 @@ public class User {
   @NotNull(message = "Password should be not null")
   private String password;
 
+  @NotBlank(message = "Role should be not empty")
+  @NotNull(message = "Role should be not null")
+  @Column(name = "ROLE")
+  private String role;
+
+  private boolean enabled;
+
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Task> tasks;
+
+
 }
