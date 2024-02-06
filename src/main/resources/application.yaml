@@ -1,0 +1,17 @@
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  output:
+      ansi:
+       enabled: always
+  datasource:
+    url: jdbc:postgresql://localhost:5432/todolist
+    username: postgres
+    password: postgres
+  jpa:
+    properties:
+      hibernate:
+        show_sql: always
+    show-sql: true
