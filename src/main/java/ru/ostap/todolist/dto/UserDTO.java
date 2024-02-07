@@ -1,11 +1,8 @@
 package ru.ostap.todolist.dto;
 
 import lombok.Data;
-import ru.ostap.todolist.dto.enums.Role;
-
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
