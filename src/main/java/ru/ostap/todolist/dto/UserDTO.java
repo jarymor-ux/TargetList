@@ -31,4 +31,6 @@ public class UserDTO {
   private boolean enabled;
 
   private List<TaskDTO> tasks;
+
+  //TODO: add docker image for db 
 }

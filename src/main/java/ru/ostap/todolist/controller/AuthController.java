@@ -34,7 +34,6 @@ public class AuthController {
         }
         registrationService.save(user);
         return "redirect:/auth/login";
-
         //TODO:Test migration to this method in RestUserController
     }
 
