@@ -1,6 +1,8 @@
 package ru.ostap.todolist.models;
 
 import lombok.Data;
+import lombok.Builder.Default;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -32,12 +34,11 @@ public class User {
   @NotNull(message = "Password should be not null")
   private String password;
 
-  @NotBlank(message = "Role should be not empty")
-  @NotNull(message = "Role should be not null")
-  @Column(name = "ROLE")
-  private String role;
+  @Column(name = "role")
+  private String role = "ROLE_USER"; //TODO:add not null and empty this field
 
-  private boolean enabled;
+  
+  private boolean enabled = true; //TODO:add not null and empty this field
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Task> tasks;

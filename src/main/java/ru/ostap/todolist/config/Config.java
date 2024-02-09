@@ -36,11 +36,9 @@ public class Config extends WebSecurityConfigurerAdapter{
                 .and()
                 .authorizeRequests()
                 .antMatchers("/auth/registration", "/auth/login").anonymous()
-                .antMatchers("/api/user/**").hasRole("ADMIN")
+                .antMatchers("/api/user/**", "/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll();
 
     }
-
-    //TODO: setting up hotkeys in vs code for all devices
 
 }

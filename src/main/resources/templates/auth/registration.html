@@ -10,7 +10,7 @@
 
     <label for="username">Введите имя пользователя: </label>
     <input type="text" th:field="*{username}" id="username"/>
-    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div> <!-- Дивы такого типа не трогай(Не изменяй значения и не удаляй), двигать можно, они отвечают за вывод ошибок-->
+    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div> 
 
 
     <br/>
@@ -31,7 +31,7 @@
 
     <br/>
 
-    <input type="submit" value="Sign up!"/>
+    <button type="submit">Sign in!</button>
 
 
 </form>

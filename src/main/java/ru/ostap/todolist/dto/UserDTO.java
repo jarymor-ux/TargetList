@@ -24,13 +24,10 @@ public class UserDTO {
   @NotNull(message = "Password should be not null")
   private String password;
 
-  @NotBlank(message = "Role should be not empty")
-  @NotNull(message = "Role should be not null")
-  private String role; //TODO: replace in class User and UserDTO with Role enum
+  private String role = "ROLE_USER"; //TODO:add not null and empty this field
 
-  private boolean enabled;
+  private boolean enabled = true; //TODO:add not null and empty this field
 
   private List<TaskDTO> tasks;
 
-  //TODO: add docker image for db 
 }
