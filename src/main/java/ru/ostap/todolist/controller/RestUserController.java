@@ -67,7 +67,7 @@ public class RestUserController {
       }
       throw new UserNotCreatedException(errorMsg.toString());
     }
-    registrationService.save(user);
+    registrationService.saveWithDto(user);
 
     return ResponseEntity.ok(HttpStatus.OK);
   }

@@ -32,7 +32,7 @@ public class AuthController {
         if (bindingResult.hasErrors()) {
             return "auth/registration";
         }
-        registrationService.save(user);
+        registrationService.saveWithDto(user);
         return "redirect:/auth/login";
     }
 

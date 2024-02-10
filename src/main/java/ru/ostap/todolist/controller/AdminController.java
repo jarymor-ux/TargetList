@@ -4,20 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import ru.ostap.todolist.models.User;
+import ru.ostap.todolist.service.RegistrationService;
 import ru.ostap.todolist.service.UserService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
     private final UserService userService;
+
+    private final RegistrationService registrationService;
     @Autowired
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, RegistrationService registrationService) {
         this.userService = userService;
+        this.registrationService = registrationService;
     }
     
     @GetMapping
@@ -32,8 +38,30 @@ public class AdminController {
         return "admin-panel/all-users";
     }
 
+    @DeleteMapping("/delete/{id}")
+    public String  deleteUser(@PathVariable long id){
+        userService.delete(id);
 
-    //TODO:add delete, input, edit, ban, show list users - functions
+        return "redirect:/admin/all-users";
+    }
+
+    @GetMapping("/add-new")
+    public String addNewUser(@ModelAttribute("user") User user){
+        return "admin-panel/add-new";
+    }
+
+    @PutMapping("/add-new")
+    public String performRegistration(@ModelAttribute("user") @Valid User user,
+                                      BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "admin-panel/add-new";
+        }
+        registrationService.save(user);
+        return "redirect:/admin/all-users";
+    }
+
+
+    //TODO:add input, edit, ban, show list users - functions
     
     
 }

@@ -6,23 +6,24 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.ostap.todolist.service.UserDetailsService;
+
+import ru.ostap.todolist.service.UserDetailsServiceImpl;
 
 @EnableWebSecurity
 public class Config extends WebSecurityConfigurerAdapter{
-    private final UserDetailsService userDetailsService;
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
 
     private final PasswordEncoder passwordEncoder;
     @Autowired
-    public Config(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
-        this.userDetailsService = userDetailsService;
+    public Config(UserDetailsServiceImpl userDetailsServiceImpl, PasswordEncoder passwordEncoder) {
+        this.userDetailsServiceImpl = userDetailsServiceImpl;
         this.passwordEncoder = passwordEncoder;
     }
-
+        
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(userDetailsService)
+                .userDetailsService(userDetailsServiceImpl)
                 .passwordEncoder(passwordEncoder);
     }
 
@@ -36,9 +37,8 @@ public class Config extends WebSecurityConfigurerAdapter{
                 .and()
                 .authorizeRequests()
                 .antMatchers("/auth/registration", "/auth/login").anonymous()
-                .antMatchers("/api/user/**", "/admin/**").hasRole("ADMIN")
+                .antMatchers("/api/user/**").hasRole("ADMIN")
                 .anyRequest().permitAll();
-
     }
 
 }

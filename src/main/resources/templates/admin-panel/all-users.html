@@ -35,6 +35,7 @@
             <th>Username</th>
             <th>Email</th>
             <th>Role</th>
+            <th>isEnabled</th>
             <th>Delete</th>
           </tr>
         </thead>
@@ -44,13 +45,18 @@
             <td th:text="${user.getUsername()}"></td>
             <td th:text="${user.getEmail()}"></td>
             <td th:text="${user.getRole()}"></td>
+            <td th:text="${user.isEnabled()}"></td>  <!-- replase with checkbox -->
             <td> 
-                <form action="@{}" method="get">
-                    //TODO: complite delete func
+                <form th:action="@{/admin/delete/{id}(id=${user.getId()})}" th:method="DELETE">
+                    <input type="submit" value="Delete">
                 </form>
             </td>
           </tr>
         </tbody>
       </table>
+
+    <form th:action="@{/admin/add-new}" th:method="GET">
+        <button type="submit" >Add new user</button>
+    </form>
 </body>
 </html>

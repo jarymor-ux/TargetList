@@ -1,12 +1,13 @@
 package ru.ostap.todolist.dto;
 
 import lombok.Data;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 public class UserDTO {
@@ -24,10 +25,10 @@ public class UserDTO {
   @NotNull(message = "Password should be not null")
   private String password;
 
-  private String role = "ROLE_USER"; //TODO:add not null and empty this field
+  @Column(name = "role")
+  private String role;
 
-  private boolean enabled = true; //TODO:add not null and empty this field
+  private boolean enabled;
 
   private List<TaskDTO> tasks;
-
 }

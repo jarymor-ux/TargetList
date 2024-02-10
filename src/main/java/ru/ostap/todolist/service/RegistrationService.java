@@ -19,10 +19,17 @@ public class RegistrationService {
         this.userService = userService;
     }
 
-    public void save(UserDTO userDTO) {
+    public void saveWithDto(UserDTO userDTO) {
         User user = dtoConverter.convertUserDTOtoUser(userDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
     }
+
+    public void save(User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userService.save(user);
+    }
+
+
 
 }
