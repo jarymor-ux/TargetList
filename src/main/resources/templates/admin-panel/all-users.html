@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All user</title>
+
+    <style>
+        table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+        }
+
+        th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        }
+
+        th {
+        background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+        background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="user : ${users}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${user.getEmail()}"></td>
+            <td th:text="${user.getRole()}"></td>
+            <td> 
+                <form action="@{}" method="get">
+                    //TODO: complite delete func
+                </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</body>
+</html>

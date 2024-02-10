@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ru.ostap.todolist.service.UserService;
@@ -24,6 +25,13 @@ public class AdminController {
         model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
         return "admin-panel/admin-panel";
     }
+
+    @GetMapping("/all-users")
+    public String getAllUsers(Model model){
+        model.addAttribute("users", userService.findAll());
+        return "admin-panel/all-users";
+    }
+
 
     //TODO:add delete, input, edit, ban, show list users - functions
     
