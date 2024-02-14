@@ -60,8 +60,26 @@ public class AdminController {
         return "redirect:/admin/all-users";
     }
 
+    @GetMapping("/edit/{id}")
+    public String edit(Model model, @PathVariable("id") long id) {
+        model.addAttribute("user", userService.getUserById(id).get());
+        return "admin-panel/edit";
+    }
 
-    //TODO:add input, edit, ban, show list users - functions
+    @PatchMapping("/edit/{id}")
+    public String update(@ModelAttribute("user ") @Valid User user, BindingResult bindingResult,
+                         @PathVariable("id") long id) {
+        if (bindingResult.hasErrors())
+            return "admin-panel/edit";
+
+        userService.update(id, user);
+        return "redirect:/admin/all-users";
+    }
+
+
+
+
+    //TODO: make the project more attractive and deal with dao 
     
     
 }

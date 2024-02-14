@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.ostap.todolist.models.User;
 import ru.ostap.todolist.repository.UserRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,10 +34,6 @@ public class UserService {
 
 
   public void save(User user) {
-  if (user == null) {
-    throw new NullPointerException();
-  }
-
 
     userRepository.save(user);
   }
@@ -48,4 +45,20 @@ public class UserService {
   public void delete(long id) {
     userRepository.deleteById(id);
   }
+
+
+  public void update(long id, User updatedUser) {
+    User userToBeUpdated = userRepository.findById(id).get();
+
+    // добавляем по сути новую книгу (которая не находится в Persistence context), поэтому нужен save()
+    updatedUser.setId(id);
+    updatedUser.setTasks(userToBeUpdated.getTasks()); // чтобы не терялась связь при обновлении
+
+    userRepository.save(updatedUser);
+  }
+
+
+
+
+
 }

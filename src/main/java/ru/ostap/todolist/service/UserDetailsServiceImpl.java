@@ -9,11 +9,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.ostap.todolist.models.User;
 @Service
-public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService{
+public class UserDetailsServiceImpl implements org.springframework.security.core.userdetails.UserDetailsService{
     private final UserService userService;
 
     @Autowired
-    public UserDetailsService(UserService userService){
+    public UserDetailsServiceImpl(UserService userService){
         this.userService = userService;
     }
 
