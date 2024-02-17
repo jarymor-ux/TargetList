@@ -9,27 +9,32 @@
 <body >
      <h1>Hello user</h1> <!--это можно удалить -->
 
-     <form th:action="@{/auth/registration}" method="get"> <!-- Все формы перемещай куда угоодно  -->
-     <button type="submit">Sign-in</button>                 <!-- Переход на форму регистрации -->           
+     <form th:action="@{/auth/registration}" method="get"> 
+     <button type="submit">Sign-in</button>                           
      </form>
      <form th:action="@{/auth/login}" method="get">
-        <button type="submit">Login</button>         <!-- Переход на форму логина --> 
+        <button type="submit">Login</button>         
      </form>
     
      <form th:action="@{/about}" method="get">
-        <button type="submit">About</button>          <!-- Переход на страницу где рассказывается о сервисе --> 
+        <button type="submit">About</button>          
      </form>
 
      <form th:action="@{/contacts}" method="get">
-        <button type="submit">Contacts</button>     <!-- Переход на страницу где перечисленны мои контакты --> 
+        <button type="submit">Contacts</button>
      </form>
 
      <form th:action="@{/logout}" method="post">
          <button type="submit">Logout</button>
      </form>
 
-    <!-- Описание сервиса: сервис предназначен для записывания целей и отслеживания их выполнения(Для справки)
-        если есть желание то сделай и страницу логина тоже
-        по любым вопросам пиши и если есть идеи что-то добавить то тоже пиши-->
+     <div sec:authorize="hasRole('ADMIN')">
+         <form th:action= "@{/admin}" method="get">
+            <button type="submit">Admin panel</button>
+         </form>
+     </div>
+
+     
+
 </body>
 </html>

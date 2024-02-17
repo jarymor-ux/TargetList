@@ -25,7 +25,8 @@
 
   <label for="role">Role: </label>
   <input type="text" th:field="*{role}" id="role"/>
-  <div style="color:red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}">Role Error</div> <!-- TODO:(pohuy)  Add vipadayshiy spisok   -->
+  <div style="color:red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}">Role Error</div>
+
 
   <br/>
 

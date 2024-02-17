@@ -36,8 +36,6 @@
             <th>Email</th>
             <th>Role</th>
             <th>isEnabled</th>
-            <!-- <th>Delete</th>
-            <th>Edit</th> -->
           </tr>
         </thead>
         <tbody>
@@ -64,5 +62,9 @@
     <form th:action="@{/admin/add-new}" th:method="GET">
         <button type="submit" >Add new user</button>
     </form>
+<br><br>
+    <form th:action= "@{/admin}" method="get">
+      <button type="submit">Back</button>
+   </form>
 </body>
 </html>
