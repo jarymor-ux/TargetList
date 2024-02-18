@@ -7,27 +7,22 @@
 
 </head>
 <body >
-     <h1>Hello user</h1> <!--это можно удалить -->
+     <h1>Hello user</h1> 
 
      <form th:action="@{/auth/registration}" method="get"> 
      <button type="submit">Sign-in</button>                           
      </form>
+      <br>
      <form th:action="@{/auth/login}" method="get">
         <button type="submit">Login</button>         
      </form>
-    
-     <form th:action="@{/about}" method="get">
-        <button type="submit">About</button>          
-     </form>
 
-     <form th:action="@{/contacts}" method="get">
-        <button type="submit">Contacts</button>
-     </form>
+     <br>
 
      <form th:action="@{/logout}" method="post">
          <button type="submit">Logout</button>
      </form>
-
+     <br>
      <div sec:authorize="hasRole('ADMIN')">
          <form th:action= "@{/admin}" method="get">
             <button type="submit">Admin panel</button>
