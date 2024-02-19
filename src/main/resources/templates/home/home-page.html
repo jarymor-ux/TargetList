@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,16 @@
 
 </head>
 <body >
-     <h1>Hello user</h1> 
+     <h1>Hello user</h1>
+
+
 
      <form th:action="@{/auth/registration}" method="get"> 
-     <button type="submit">Sign-in</button>                           
+     <button type="submit">Sign-in</button>      <!-- hide if Authorized -->                      
      </form>
       <br>
      <form th:action="@{/auth/login}" method="get">
-        <button type="submit">Login</button>         
+        <button type="submit">Login</button>     <!-- hide if Authorized --> 
      </form>
 
      <br>
@@ -22,12 +25,30 @@
      <form th:action="@{/logout}" method="post">
          <button type="submit">Logout</button>
      </form>
+
      <br>
+
      <div sec:authorize="hasRole('ADMIN')">
          <form th:action= "@{/admin}" method="get">
             <button type="submit">Admin panel</button>
          </form>
      </div>
+
+     <br >
+
+     <div sec:authorize="authenticated"> <!-- create get method in UserDetails.java(intellij dont see this fields  -->
+         <h2 th:text="${#authentication.principal.email}"></h2>
+     </div> <!-- add task table end create,edit, delete func -->
+
+
+
+
+
+
+
+
+
+
 
      
 

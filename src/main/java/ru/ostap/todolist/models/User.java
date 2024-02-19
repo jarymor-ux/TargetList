@@ -40,5 +40,7 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Task> tasks;
 
+
+
   //TODO:add user functional - create, edit, delete the tasks and create,edit, delete comments for task
 }

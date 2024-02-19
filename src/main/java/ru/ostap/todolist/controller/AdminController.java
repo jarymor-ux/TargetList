@@ -28,7 +28,7 @@ public class AdminController {
     
     @GetMapping
     public String adminPanel(Model model){
-        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getDetails());
         return "admin-panel/admin-panel";
     }
 

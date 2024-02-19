@@ -1,5 +1,6 @@
 package ru.ostap.todolist.security;
 
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import ru.ostap.todolist.models.User;
@@ -24,28 +25,34 @@ public class UserDetails implements org.springframework.security.core.userdetail
         return this.user.getPassword();
     }
 
+
+
     @Override
     public String getUsername() {
         return this.user.getUsername();
     }
 
+    public String getEmail(){
+        return this.user.getEmail();
+    }
+
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return user.isEnabled();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return user.isEnabled();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return user.isEnabled();
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return user.isEnabled();
     }
 }
