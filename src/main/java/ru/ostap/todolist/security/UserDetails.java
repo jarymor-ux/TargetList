@@ -3,10 +3,13 @@ package ru.ostap.todolist.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.transaction.annotation.Transactional;
+import ru.ostap.todolist.models.Task;
 import ru.ostap.todolist.models.User;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 public class UserDetails implements org.springframework.security.core.userdetails.UserDetails{
     private final User user;
@@ -34,6 +37,14 @@ public class UserDetails implements org.springframework.security.core.userdetail
 
     public String getEmail(){
         return this.user.getEmail();
+    }
+
+    public List<Task> getTasks(){
+        return this.user.getTasks();
+    }
+
+    public User getUser(){
+        return this.user;
     }
 
     @Override

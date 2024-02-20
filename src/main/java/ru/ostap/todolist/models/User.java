@@ -37,7 +37,7 @@ public class User {
 
   private boolean enabled;
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
   private List<Task> tasks;
 
 

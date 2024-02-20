@@ -1,56 +1,69 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org"
-                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
+    <style>
+        /* Стили для кнопок входа */
+        .login-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
 
+        /* Стили для блока задач */
+        .tasks-container {
+            display: flex;
+            flex-wrap: wrap; /* Разрешить перенос элементов на новую строку */
+        }
+
+        /* Стили для каждой задачи */
+        .task {
+            margin-right: 20px;
+            margin-bottom: 20px; /* Отступ снизу */
+        }
+    </style>
 </head>
-<body >
-     <h1>Hello user</h1>
+<body>
+<div class="login-buttons">
+    <div sec:authorize="!authenticated">
+        <form th:action="@{/auth/registration}" method="get">
+            <button type="submit">Sign-in</button> <!-- hide if Authorized -->
+        </form>
+        <br>
+        <form th:action="@{/auth/login}" method="get">
+            <button type="submit">Login</button> <!-- hide if Authorized -->
+        </form>
+    </div>
+    <br>
+    <form sec:authorize="authenticated" th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
 
+<br>
 
+<div class="tasks-container" id="tasksContainer">
+    <div th:each="task : ${tasks}" class="task" sec:authorize="authenticated">
+        <h1 th:text="${task.getTitle()}"></h1>
+        <div th:each="comment :${task.getComments()}">
+            <h3 th:text="${comment.getComment()}"></h3>     <!--//TODO:add edit,add,delete functional-->
+        </div>
+    </div>
+</div>
 
-     <form th:action="@{/auth/registration}" method="get"> 
-     <button type="submit">Sign-in</button>      <!-- hide if Authorized -->                      
-     </form>
-      <br>
-     <form th:action="@{/auth/login}" method="get">
-        <button type="submit">Login</button>     <!-- hide if Authorized --> 
-     </form>
-
-     <br>
-
-     <form th:action="@{/logout}" method="post">
-         <button type="submit">Logout</button>
-     </form>
-
-     <br>
-
-     <div sec:authorize="hasRole('ADMIN')">
-         <form th:action= "@{/admin}" method="get">
-            <button type="submit">Admin panel</button>
-         </form>
-     </div>
-
-     <br >
-
-     <div sec:authorize="authenticated"> <!-- create get method in UserDetails.java(intellij dont see this fields  -->
-         <h2 th:text="${#authentication.principal.email}"></h2>
-     </div> <!-- add task table end create,edit, delete func -->
-
-
-
-
-
-
-
-
-
-
-
-     
-
+<script>
+    window.addEventListener('scroll', function() {
+        var tasksContainer = document.getElementById('tasksContainer');
+        var lastTask = tasksContainer.lastElementChild;
+        var lastTaskRect = lastTask.getBoundingClientRect();
+        if (lastTaskRect.bottom <= window.innerHeight) {
+            // Добавить новые задачи вниз страницы
+            // Например, через AJAX запрос или другим способом
+        }
+    });
+</script>
 </body>
 </html>

@@ -21,6 +21,6 @@ public class Task {
 
   private Integer progress;
 
-  @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
   private List<Comment> comments;
 }
