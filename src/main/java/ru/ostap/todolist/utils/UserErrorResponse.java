@@ -1,13 +1,13 @@
 package ru.ostap.todolist.utils;
 
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.sql.Timestamp;
 
 @Data
 @AllArgsConstructor
 public class UserErrorResponse {
-  private String msg;
-  private Timestamp timestamp;
+    private String msg;
+    private Timestamp timestamp;
 }

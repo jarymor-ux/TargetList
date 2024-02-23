@@ -6,20 +6,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import ru.ostap.todolist.service.UserDetailsServiceImpl;
 
 @EnableWebSecurity
-public class Config extends WebSecurityConfigurerAdapter{
+public class Config extends WebSecurityConfigurerAdapter {
     private final UserDetailsServiceImpl userDetailsServiceImpl;
 
     private final PasswordEncoder passwordEncoder;
+
     @Autowired
     public Config(UserDetailsServiceImpl userDetailsServiceImpl, PasswordEncoder passwordEncoder) {
         this.userDetailsServiceImpl = userDetailsServiceImpl;
         this.passwordEncoder = passwordEncoder;
     }
-        
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -37,7 +37,7 @@ public class Config extends WebSecurityConfigurerAdapter{
                 .and()
                 .authorizeRequests()
                 .antMatchers("/auth/registration", "/auth/login").anonymous()
-                .antMatchers("/api/user/**","/admin/**").hasRole("ADMIN")
+                .antMatchers("/api/user/**", "/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll();
     }
 }

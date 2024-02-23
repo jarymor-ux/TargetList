@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import ru.ostap.todolist.models.User;
 import ru.ostap.todolist.service.RegistrationService;
 import ru.ostap.todolist.service.UserService;
@@ -20,33 +19,34 @@ public class AdminController {
     private final UserService userService;
 
     private final RegistrationService registrationService;
+
     @Autowired
     public AdminController(UserService userService, RegistrationService registrationService) {
         this.userService = userService;
         this.registrationService = registrationService;
     }
-    
+
     @GetMapping
-    public String adminPanel(Model model){
+    public String adminPanel(Model model) {
         model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getDetails());
         return "admin-panel/admin-panel";
     }
 
     @GetMapping("/all-users")
-    public String getAllUsers(Model model){
+    public String getAllUsers(Model model) {
         model.addAttribute("users", userService.findAll());
         return "admin-panel/all-users";
     }
 
     @DeleteMapping("/delete/{id}")
-    public String  deleteUser(@PathVariable long id){
+    public String deleteUser(@PathVariable long id) {
         userService.delete(id);
 
         return "redirect:/admin/all-users";
     }
 
     @GetMapping("/add-new")
-    public String addNewUser(@ModelAttribute("user") User user){
+    public String addNewUser(@ModelAttribute("user") User user) {
         return "admin-panel/add-new";
     }
 
@@ -84,9 +84,4 @@ public class AdminController {
     }
 
 
-
-
-    
-    
-    
 }

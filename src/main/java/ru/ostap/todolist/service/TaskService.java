@@ -3,8 +3,10 @@ package ru.ostap.todolist.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.ostap.todolist.models.Task;
+import ru.ostap.todolist.models.User;
 import ru.ostap.todolist.repository.TaskRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,5 +33,16 @@ public class TaskService {
         taskRepository.save(updatedTask);
 
         //TODO:page not refresh values
+    }
+
+    public List<Task> getTasksByUser(User user) throws Exception {
+        Optional<List<Task>> tasks = taskRepository.getTaskByUser(user);
+
+        if (tasks.isPresent()) {
+            return taskRepository.getTaskByUser(user).get();
+        }else {
+            throw new Exception("Task list is empty");
+        }
+
     }
 }

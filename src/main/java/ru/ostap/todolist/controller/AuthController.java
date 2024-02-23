@@ -7,22 +7,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import ru.ostap.todolist.dto.UserDTO;
 import ru.ostap.todolist.service.RegistrationService;
 
 import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
     private final RegistrationService registrationService;
+
     @Autowired
     public AuthController(RegistrationService registrationService) {
         this.registrationService = registrationService;
     }
 
     @GetMapping("/registration")
-    public String registration(@ModelAttribute("user") UserDTO userDTO){
+    public String registration(@ModelAttribute("user") UserDTO userDTO) {
         return "auth/registration";
     }
 
@@ -37,10 +38,9 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String loginForm(){
+    public String loginForm() {
         return "auth/form-login";
     }
 
-    
 
 }

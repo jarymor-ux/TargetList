@@ -9,19 +9,19 @@ import java.util.List;
 @Entity
 @Table(name = "tasks")
 public class Task {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-  private String title;
+    private String title;
 
-  private Integer progress;
+    private Integer progress;
 
-  @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-  private List<Comment> comments;
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Comment> comments;
 
 }

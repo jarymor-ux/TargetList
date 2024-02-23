@@ -11,24 +11,24 @@ import java.util.List;
 
 @Data
 public class UserDTO {
-  @NotBlank(message = "Username should be not empty")
-  @Size(min = 2, max = 15, message = "Username should be between 2 and 15")
-  @NotNull(message = "Username should be not null")
-  private String username;
+    @NotBlank(message = "Username should be not empty")
+    @Size(min = 2, max = 15, message = "Username should be between 2 and 15")
+    @NotNull(message = "Username should be not null")
+    private String username;
 
-  @Email(message = "Email must be valid")
-  @NotBlank(message = "Email should be not empty")
-  @NotNull(message = "Email should be not null")
-  private String email;
+    @Email(message = "Email must be valid")
+    @NotBlank(message = "Email should be not empty")
+    @NotNull(message = "Email should be not null")
+    private String email;
 
-  @NotBlank(message = "Password should be not empty")
-  @NotNull(message = "Password should be not null")
-  private String password;
+    @NotBlank(message = "Password should be not empty")
+    @NotNull(message = "Password should be not null")
+    private String password;
 
-  @Column(name = "role")
-  private String role;
+    @Column(name = "role")
+    private String role;
 
-  private boolean enabled;
+    private boolean enabled;
 
-  private List<TaskDTO> tasks;
+    private List<TaskDTO> tasks;
 }

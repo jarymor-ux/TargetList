@@ -1,22 +1,23 @@
 package ru.ostap.todolist.security;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ostap.todolist.models.Task;
 import ru.ostap.todolist.models.User;
+import ru.ostap.todolist.service.TaskService;
+import ru.ostap.todolist.service.UserService;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
+@RequiredArgsConstructor
 public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
-    private final User user;
 
-    public UserDetails(User user) {
-        this.user = user;
-    }
+    private final User user;
+    private final TaskService taskService;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -37,9 +38,11 @@ public class UserDetails implements org.springframework.security.core.userdetail
         return this.user.getEmail();
     }
 
-    public List<Task> getTasks() {
-        return this.user.getTasks();
+    public List<Task> getTasks() throws Exception {
+        return taskService.getTasksByUser(this.user);
     }
+
+
 
     public User getUser() {
         return this.user;

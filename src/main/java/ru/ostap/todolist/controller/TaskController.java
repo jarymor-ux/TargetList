@@ -30,6 +30,7 @@ public class TaskController {
         if (bindingResult.hasErrors())
             return "user/task/edit";
         taskService.update(id, task);
+
         return "redirect:/";
     }
 
