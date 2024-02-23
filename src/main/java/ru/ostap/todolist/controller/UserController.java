@@ -21,6 +21,7 @@ public class UserController {
     
     @GetMapping
     public String home(@AuthenticationPrincipal UserDetails userDetails, Model model){
+
         if (userDetails != null) {
             model.addAttribute("tasks", userDetails.getTasks());
         }

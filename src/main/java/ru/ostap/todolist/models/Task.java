@@ -23,4 +23,5 @@ public class Task {
 
   @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
   private List<Comment> comments;
+
 }

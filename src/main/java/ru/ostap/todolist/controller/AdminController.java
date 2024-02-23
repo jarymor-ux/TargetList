@@ -61,8 +61,15 @@ public class AdminController {
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(Model model, @PathVariable("id") long id) {
-        model.addAttribute("user", userService.getUserById(id).get());
+    public String edit(Model model, @PathVariable("id") long id) throws Exception {
+        User user;
+        if (userService.getUserById(id).isPresent()) {
+            user = userService.getUserById(id).get();
+        }else {
+            throw  new Exception("User not found");
+        }
+
+        model.addAttribute("user", user);
         return "admin-panel/edit";
     }
 

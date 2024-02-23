@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class UserDetails implements org.springframework.security.core.userdetails.UserDetails{
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
     private final User user;
 
     public UserDetails(User user) {
@@ -28,22 +28,20 @@ public class UserDetails implements org.springframework.security.core.userdetail
         return this.user.getPassword();
     }
 
-
-
     @Override
     public String getUsername() {
         return this.user.getUsername();
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return this.user.getEmail();
     }
 
-    public List<Task> getTasks(){
+    public List<Task> getTasks() {
         return this.user.getTasks();
     }
 
-    public User getUser(){
+    public User getUser() {
         return this.user;
     }
 

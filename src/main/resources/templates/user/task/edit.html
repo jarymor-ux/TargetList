@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/task/edit/{id}(id=${task.getId()})}" th:object="${task}">
+
+  <label for="title">Title: </label>
+  <input type="text" th:field="*{title}" id="title"/>
+  <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Username Error</div> <!-- Дивы такого типа не трогай(Не изменяй значения и не удаляй), двигать можно, они отвечают за вывод ошибок-->
+
+  <br/>
+
+  <label for="progress">Progress: </label>
+  <input type="range" min="0" max="100" th:field="*{progress}" id="progress"/>
+  <div style="color:red" th:if="${#fields.hasErrors('progress')}" th:errors="*{progress}">Progress Error</div>
+
+  <br/>
+
+  <input type="submit" value="OK"/>
+
+
+</form>
+
+</body>
+</html>

@@ -87,6 +87,6 @@ public class RestUserController {
             new UserErrorResponse(e.getMessage(), new Timestamp(System.currentTimeMillis()));
     return new ResponseEntity<>(userErrorResponse, HttpStatus.BAD_REQUEST);
   }
-  //TODO:create more methods
+  //TODO:create more methods(last priority)
 }
 

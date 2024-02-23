@@ -2,7 +2,6 @@ package ru.ostap.todolist.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.ostap.todolist.models.User;
 import ru.ostap.todolist.repository.UserRepository;
 
