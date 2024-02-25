@@ -17,7 +17,8 @@ public class Comment {
 
     @NotBlank
     @NotNull
-    private String comment;
+    @Column(name = "comment")
+    private String commentMSG;
 
     @ManyToOne
     @JoinColumn(name = "task_id")

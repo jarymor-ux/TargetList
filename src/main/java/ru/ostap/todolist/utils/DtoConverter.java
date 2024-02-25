@@ -40,7 +40,7 @@ public class DtoConverter {
     private List<CommentDTO> commentListToCommentDTOList(List<Comment> comments) {
         List<CommentDTO> commentDTO = new ArrayList<>();
         for (Comment comment : comments) {
-            commentDTO.add(new CommentDTO(comment.getComment(), comment.getCreated_at()));
+            commentDTO.add(new CommentDTO(comment.getCommentMSG(), comment.getCreated_at()));
         }
         return commentDTO;
     }

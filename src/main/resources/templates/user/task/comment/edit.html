@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit comment.</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/comment/edit/{id}(id=${comment.getId()})}" th:object="${comment}">
+
+
+
+    <label for="commentMSG">Comment: </label>
+    <input type="text" th:field="*{commentMSG}" id="commentMSG"/>
+    <div style="color:red" th:if="${#fields.hasErrors('commentMSG')}" th:errors="*{commentMSG}">Comment Error</div>
+
+    <br/>
+
+    <input type="submit" value="OK"/>
+
+
+</form>
+
+</body>
+</html>

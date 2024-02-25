@@ -8,6 +8,6 @@ import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 public class CommentDTO {
-    private String comment;
+    private String commentMSG;
     private Timestamp created_at;
 }

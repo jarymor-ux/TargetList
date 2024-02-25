@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/task/edit/{id}(id=${task.getId()})}" th:object="${task}">
+<form th:method="PUT" th:action="@{/task/add-new}" th:object="${task}">
 
   <label for="title">Title: </label>
   <input type="text" th:field="*{title}" id="title"/>

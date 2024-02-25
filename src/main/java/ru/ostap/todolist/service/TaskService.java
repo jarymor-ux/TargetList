@@ -1,10 +1,14 @@
 package ru.ostap.todolist.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.ostap.todolist.models.Task;
 import ru.ostap.todolist.models.User;
 import ru.ostap.todolist.repository.TaskRepository;
+import ru.ostap.todolist.repository.UserRepository;
+import ru.ostap.todolist.security.UserDetails;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,8 +18,14 @@ import java.util.Optional;
 public class TaskService {
 
     private final TaskRepository taskRepository;
+    private final UserRepository userRepository;
 
-    public void save(Task task) {
+    public void saveNew(Task task, UserDetails userDetails) {
+        task.setUser(userRepository.getUserById(userDetails.getUser().getId()).get());
+        taskRepository.save(task);
+    }
+
+    public void save(Task task){
         taskRepository.save(task);
     }
 
@@ -28,11 +38,11 @@ public class TaskService {
 
         updatedTask.setId(id);
         updatedTask.setUser(taskToBeUpdated.getUser());
-        updatedTask.setComments(taskToBeUpdated.getComments()); // чтобы не терялась связь при обновлении
+        updatedTask.setComments(taskToBeUpdated.getComments());
 
         taskRepository.save(updatedTask);
 
-        //TODO:page not refresh values
+
     }
 
     public List<Task> getTasksByUser(User user) throws Exception {
