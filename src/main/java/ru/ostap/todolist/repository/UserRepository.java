@@ -8,9 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> getUserById(Long id);
+  Optional<User> getUserById(Long id);
 
-    Optional<User> getUserByUsername(String username);
+  Optional<User> getUserByUsername(String username);
 
-    void deleteById(long id);
+  void deleteById(long id);
 }

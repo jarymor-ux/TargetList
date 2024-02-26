@@ -15,25 +15,23 @@ import javax.validation.Valid;
 @RequestMapping("/comment")
 public class CommentController {
 
-    private final CommentService commentService;
+  private final CommentService commentService;
 
+  @GetMapping("/edit/{id}")
+  public String edit(@PathVariable long id, Model model) throws Exception {
+    model.addAttribute("comment", commentService.getCommentById(id));
 
-    @GetMapping("/edit/{id}")
-    public String edit(@PathVariable long id, Model model) throws Exception {
-        model.addAttribute("comment", commentService.getCommentById(id));
+    return "user/task/comment/edit";
+  }
 
-        return "user/task/comment/edit";
+  @PatchMapping("/edit/{id}")
+  private String update(
+      @ModelAttribute("comment") @Valid Comment comment, BindingResult bindingResult) {
+
+    if (bindingResult.hasErrors()) {
+      return "user/task/comment/edit";
     }
-
-
-    @PatchMapping("/edit/{id}")
-    private String update(@ModelAttribute("comment") @Valid Comment comment, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            return "user/task/comment/edit";
-        }
-        commentService.save(comment);
-        return "redirect:/";
-
-    }
+    commentService.save(comment);
+    return "redirect:/";
+  }
 }

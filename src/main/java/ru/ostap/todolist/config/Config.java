@@ -10,34 +10,36 @@ import ru.ostap.todolist.service.UserDetailsServiceImpl;
 
 @EnableWebSecurity
 public class Config extends WebSecurityConfigurerAdapter {
-    private final UserDetailsServiceImpl userDetailsServiceImpl;
+  private final UserDetailsServiceImpl userDetailsServiceImpl;
 
-    private final PasswordEncoder passwordEncoder;
+  private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public Config(UserDetailsServiceImpl userDetailsServiceImpl, PasswordEncoder passwordEncoder) {
-        this.userDetailsServiceImpl = userDetailsServiceImpl;
-        this.passwordEncoder = passwordEncoder;
-    }
+  @Autowired
+  public Config(UserDetailsServiceImpl userDetailsServiceImpl, PasswordEncoder passwordEncoder) {
+    this.userDetailsServiceImpl = userDetailsServiceImpl;
+    this.passwordEncoder = passwordEncoder;
+  }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsServiceImpl)
-                .passwordEncoder(passwordEncoder);
-    }
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder);
+  }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .formLogin().loginPage("/auth/login")
-                .loginProcessingUrl("/process_login")
-                .defaultSuccessUrl("/")
-                .and()
-                .authorizeRequests()
-                .antMatchers("/auth/registration", "/auth/login").anonymous()
-                .antMatchers("/api/user/**", "/admin/**").hasRole("ADMIN")
-                .anyRequest().permitAll();
-    }
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.csrf()
+        .disable()
+        .formLogin()
+        .loginPage("/auth/login")
+        .loginProcessingUrl("/process_login")
+        .defaultSuccessUrl("/")
+        .and()
+        .authorizeRequests()
+        .antMatchers("/auth/registration", "/auth/login")
+        .anonymous()
+        .antMatchers("/api/user/**", "/admin/**")
+        .hasRole("ADMIN")
+        .anyRequest()
+        .permitAll();
+  }
 }

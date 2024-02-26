@@ -11,22 +11,19 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserDetailsServiceImpl implements org.springframework.security.core.userdetails.UserDetailsService {
-    private final UserService userService;
-    private final TaskService taskService;
+public class UserDetailsServiceImpl
+    implements org.springframework.security.core.userdetails.UserDetailsService {
+  private final UserService userService;
+  private final TaskService taskService;
 
+  @Override
+  public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    Optional<User> user = userService.getUserByUsername(s);
 
-
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        Optional<User> user = userService.getUserByUsername(s);
-
-        if (user.isEmpty()) {
-            throw new UsernameNotFoundException("User not found");
-        }
-
-        return new ru.ostap.todolist.security.UserDetails(user.get(), taskService);
+    if (user.isEmpty()) {
+      throw new UsernameNotFoundException("User not found");
     }
 
-
+    return new ru.ostap.todolist.security.UserDetails(user.get(), taskService);
+  }
 }

@@ -11,19 +11,19 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "comments")
 public class Comment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @NotBlank
-    @NotNull
-    @Column(name = "comment")
-    private String commentMSG;
+  @NotBlank
+  @NotNull
+  @Column(name = "comment")
+  private String commentMSG;
 
-    @ManyToOne
-    @JoinColumn(name = "task_id")
-    private Task task;
+  @ManyToOne
+  @JoinColumn(name = "task_id")
+  private Task task;
 
-    @Column(name = "created_at")
-    private Timestamp created_at;
+  @Column(name = "created_at")
+  private Timestamp created_at;
 }

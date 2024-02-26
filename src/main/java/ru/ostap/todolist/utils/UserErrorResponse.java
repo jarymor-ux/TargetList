@@ -8,6 +8,6 @@ import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 public class UserErrorResponse {
-    private String msg;
-    private Timestamp timestamp;
+  private String msg;
+  private Timestamp timestamp;
 }

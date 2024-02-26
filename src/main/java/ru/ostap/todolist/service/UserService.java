@@ -12,6 +12,7 @@ import java.util.Optional;
 public class UserService {
 
   private final UserRepository userRepository;
+
   @Autowired
   public UserService(UserRepository userRepository) {
     this.userRepository = userRepository;
@@ -21,23 +22,21 @@ public class UserService {
     return userRepository.getUserById(id);
   }
 
-  public Optional<User> getUserByUsername(String username){
+  public Optional<User> getUserByUsername(String username) {
     return userRepository.getUserByUsername(username);
   }
-
 
   public void save(User user) {
     userRepository.save(user);
   }
 
-  public List<User> findAll(){
-      return userRepository.findAll();
+  public List<User> findAll() {
+    return userRepository.findAll();
   }
 
   public void delete(long id) {
     userRepository.deleteById(id);
   }
-
 
   public void update(long id, User updatedUser) {
     User userToBeUpdated = userRepository.findById(id).get();
@@ -47,9 +46,4 @@ public class UserService {
 
     userRepository.save(updatedUser);
   }
-
-
-
-
-
 }

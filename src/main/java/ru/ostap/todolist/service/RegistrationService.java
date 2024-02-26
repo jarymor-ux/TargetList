@@ -10,27 +10,26 @@ import ru.ostap.todolist.utils.DtoConverter;
 @Service
 public class RegistrationService {
 
-    private final DtoConverter dtoConverter;
-    private final PasswordEncoder passwordEncoder;
-    private final UserService userService;
+  private final DtoConverter dtoConverter;
+  private final PasswordEncoder passwordEncoder;
+  private final UserService userService;
 
-    @Autowired
-    public RegistrationService(DtoConverter dtoConverter, PasswordEncoder passwordEncoder, UserService userService) {
-        this.dtoConverter = dtoConverter;
-        this.passwordEncoder = passwordEncoder;
-        this.userService = userService;
-    }
+  @Autowired
+  public RegistrationService(
+      DtoConverter dtoConverter, PasswordEncoder passwordEncoder, UserService userService) {
+    this.dtoConverter = dtoConverter;
+    this.passwordEncoder = passwordEncoder;
+    this.userService = userService;
+  }
 
-    public void saveWithDto(UserDTO userDTO) {
-        User user = dtoConverter.convertUserDTOtoUser(userDTO);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.save(user);
-    }
+  public void saveWithDto(UserDTO userDTO) {
+    User user = dtoConverter.convertUserDTOtoUser(userDTO);
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    userService.save(user);
+  }
 
-    public void save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.save(user);
-    }
-
-
+  public void save(User user) {
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    userService.save(user);
+  }
 }

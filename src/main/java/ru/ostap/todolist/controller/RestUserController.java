@@ -36,7 +36,8 @@ public class RestUserController {
   private final RegistrationService registrationService;
 
   @Autowired
-  public RestUserController(UserService userService, DtoConverter dtoConverter, RegistrationService registrationService) {
+  public RestUserController(
+      UserService userService, DtoConverter dtoConverter, RegistrationService registrationService) {
     this.userService = userService;
     this.dtoConverter = dtoConverter;
     this.registrationService = registrationService;
@@ -44,7 +45,7 @@ public class RestUserController {
 
   @GetMapping("/{id}")
   public ResponseEntity<UserDTO> getUserById(@PathVariable long id) {
-    if (userService.getUserById(id).isEmpty()){
+    if (userService.getUserById(id).isEmpty()) {
       throw new UsernameNotFoundException("User not found");
     }
     return ResponseEntity.status(HttpStatus.OK)
@@ -53,7 +54,7 @@ public class RestUserController {
 
   @PutMapping("/create")
   public ResponseEntity<HttpStatus> create(
-     @RequestBody @Valid UserDTO user, BindingResult bindingResult) {
+      @RequestBody @Valid UserDTO user, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       StringBuilder errorMsg = new StringBuilder();
 
@@ -84,9 +85,8 @@ public class RestUserController {
   private ResponseEntity<UserErrorResponse> handleException(UsernameNotFoundException e) {
 
     UserErrorResponse userErrorResponse =
-            new UserErrorResponse(e.getMessage(), new Timestamp(System.currentTimeMillis()));
+        new UserErrorResponse(e.getMessage(), new Timestamp(System.currentTimeMillis()));
     return new ResponseEntity<>(userErrorResponse, HttpStatus.BAD_REQUEST);
   }
-  //TODO:create more methods(last priority)
+  // TODO:create more methods(last priority)
 }
-

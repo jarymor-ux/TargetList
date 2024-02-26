@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class TaskDTO {
-    private String title;
-    private int progress;
-    private List<CommentDTO> comments;
+  private String title;
+  private int progress;
+  private List<CommentDTO> comments;
 }

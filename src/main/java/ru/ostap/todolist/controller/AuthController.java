@@ -15,32 +15,30 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
-    private final RegistrationService registrationService;
+  private final RegistrationService registrationService;
 
-    @Autowired
-    public AuthController(RegistrationService registrationService) {
-        this.registrationService = registrationService;
+  @Autowired
+  public AuthController(RegistrationService registrationService) {
+    this.registrationService = registrationService;
+  }
+
+  @GetMapping("/registration")
+  public String registration(@ModelAttribute("user") UserDTO userDTO) {
+    return "auth/registration";
+  }
+
+  @PutMapping("/registration")
+  public String performRegistration(
+      @ModelAttribute("user") @Valid UserDTO user, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return "auth/registration";
     }
+    registrationService.saveWithDto(user);
+    return "redirect:/auth/login";
+  }
 
-    @GetMapping("/registration")
-    public String registration(@ModelAttribute("user") UserDTO userDTO) {
-        return "auth/registration";
-    }
-
-    @PutMapping("/registration")
-    public String performRegistration(@ModelAttribute("user") @Valid UserDTO user,
-                                      BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "auth/registration";
-        }
-        registrationService.saveWithDto(user);
-        return "redirect:/auth/login";
-    }
-
-    @GetMapping("/login")
-    public String loginForm() {
-        return "auth/form-login";
-    }
-
-
+  @GetMapping("/login")
+  public String loginForm() {
+    return "auth/form-login";
+  }
 }
