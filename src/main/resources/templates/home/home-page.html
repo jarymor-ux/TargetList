@@ -52,12 +52,18 @@
             <button type="submit">Edit task.</button>
         </form>
         <form th:action="@{/task/delete/{id}(id=${task.getId()})}" th:method="delete">
-            <button type="submit">Delete.</button>
+            <input type="submit" value="Delete">
+        </form>
+        <form th:action="@{/comment/create/{id}(id=${task.getId()})}" method="get">
+            <button type="submit">Add new comment</button>
         </form>
         <div th:each="comment :${task.getComments()}">
                 <h3 th:text="${comment.getCommentMSG()}"></h3>
             <form th:action="@{/comment/edit/{id}(id=${comment.getId()})}" th:method="get">
                 <button type="submit">Edit comment.</button>
+            </form>
+            <form th:action="@{/comment/delete/{id}(id=${comment.getId()})}" th:method="delete">
+                <button type="submit">Delete</button>
             </form>
         </div>
 

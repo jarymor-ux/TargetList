@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+
+<form th:method="PUT" th:action="@{/comment/add-new}" th:object="${comment}">
+
+    <label for="commentMSG">Title: </label>
+    <input type="text" th:field="*{commentMSG}" id="commentMSG"/>
+    <div style="color:red" th:if="${#fields.hasErrors('commentMSG')}" th:errors="*{commentMSG}">commentMSG Error</div>
+
+    <input type="hidden" th:field="${taskId}" th:value="id">
+
+    <br/>
+
+    <input type="submit" value="OK"/>
+
+
+</form>
+
+</body>
+</html>

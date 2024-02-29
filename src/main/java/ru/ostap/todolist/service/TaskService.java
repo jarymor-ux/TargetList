@@ -8,6 +8,7 @@ import ru.ostap.todolist.models.User;
 import ru.ostap.todolist.repository.TaskRepository;
 import ru.ostap.todolist.repository.UserRepository;
 import ru.ostap.todolist.security.UserDetails;
+import ru.ostap.todolist.utils.DtoConverter;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,7 @@ public class TaskService {
 
   private final TaskRepository taskRepository;
   private final UserRepository userRepository;
+  private final DtoConverter dtoConverter;
 
   public void saveNew(Task task, UserDetails userDetails) {
     task.setUser(userRepository.getUserById(userDetails.getUser().getId()).get());
@@ -55,6 +57,8 @@ public class TaskService {
   public void deleteById(long id){
 
     taskRepository.deleteById(id);
+
+
 
 
   }

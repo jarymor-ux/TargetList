@@ -19,6 +19,7 @@ import javax.validation.Valid;
 public class TaskController {
 
   private final TaskService taskService;
+  private final TaskRepository taskRepository;
 
   @GetMapping("/edit/{id}")
   public String editForm(Model model, @PathVariable("id") long id) {
@@ -56,12 +57,12 @@ public class TaskController {
     return "redirect:/";
   }
 
-  @DeleteMapping("/delete/{id}")
+  @DeleteMapping(value = "/delete/{id}")
   public String deleteTaskById(@PathVariable long id){
-
     taskService.deleteById(id);
-
 
     return "redirect:/";
   }
+
+
 }

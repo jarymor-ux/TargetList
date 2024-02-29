@@ -54,4 +54,25 @@ public class DtoConverter {
     user.setEnabled(userDTO.isEnabled());
     return user;
   }
+
+  public TaskDTO convertTastToTaskDTO(Task task){
+    TaskDTO taskDTO = new TaskDTO();
+    taskDTO.setTitle(task.getTitle());
+    taskDTO.setProgress(task.getProgress());
+    taskDTO.setComments(commentListToCommentDTOList(task.getComments()));
+
+    return taskDTO;
+  }
+
+
+  public CommentDTO convertCommentToCommentDTO(Comment comment){
+    CommentDTO commentDTO = new CommentDTO();
+
+    commentDTO.setCommentMSG(commentDTO.getCommentMSG());
+    commentDTO.setCreated_at(commentDTO.getCreated_at());
+
+    return commentDTO;
+
+
+  }
 }

@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.ostap.todolist.models.Comment;
 import ru.ostap.todolist.service.CommentService;
+import ru.ostap.todolist.service.TaskService;
 
 import javax.validation.Valid;
 
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 public class CommentController {
 
   private final CommentService commentService;
+  private final TaskService taskService;
 
   @GetMapping("/edit/{id}")
   public String edit(@PathVariable long id, Model model) throws Exception {
@@ -31,7 +33,33 @@ public class CommentController {
     if (bindingResult.hasErrors()) {
       return "user/task/comment/edit";
     }
-    commentService.save(comment);
+    commentService.saveNew(comment);
+    return "redirect:/";
+  }
+
+  @DeleteMapping("/delete/{id}")
+  public String delete(@PathVariable long id){
+    commentService.delete(id);
+    return "redirect:/";
+  }
+
+  @GetMapping("/create/{id}")
+  public String create(@ModelAttribute("comment") Comment comment, @ModelAttribute("taskId") Long id){
+    comment.setTask(taskService.getTaskById(id).get());
+    return "user/task/comment/add-new";
+  }
+
+  @PutMapping("/create")
+  public String createComment(@ModelAttribute("comment") @Valid Comment comment, BindingResult bindingResult){
+
+    if (bindingResult.hasErrors()) {
+      return "user/task/comment/add-new";
+    }
+
+
+
+    commentService.saveNew(comment);
+
     return "redirect:/";
   }
 }
